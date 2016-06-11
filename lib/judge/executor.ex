@@ -4,7 +4,7 @@ defmodule Judge.Executor do
   end
 
   defp evaluate_condition(evidence, condition) do
-    module = Module.concat(Judge, "#{String.capitalize(condition[:type])}Executor")
+    module = Module.concat(Judge, "#{String.capitalize(condition[:type])}Condition")
     module.execute(evidence, condition)
   end
 end

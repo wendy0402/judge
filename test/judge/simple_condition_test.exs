@@ -1,7 +1,7 @@
-defmodule SimpleExecutorTest do
+defmodule SimpleConditionTest do
   use ExUnit.Case
 
-  import Judge.SimpleExecutor
+  import Judge.SimpleCondition
 
   # equal
   test "is_equal_to with evidence value == expected_value from conditions" do

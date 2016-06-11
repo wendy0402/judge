@@ -52,7 +52,6 @@ defmodule Judge.Knowledge do
   def handle_call({:evaluate, evidence}, _from, current_rules) do
     result = Enum.find(current_rules, %{ decisions: %{} }, (fn(rule) ->
         Judge.Executor.execute(evidence, rule)
-        # Judge.SimpleExecutor.execute(evidence, rule)
       end)
     )
     { :reply, result[:decisions], current_rules }
