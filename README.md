@@ -1,6 +1,6 @@
 # Judge
 
-**TODO: Add description**
+Judge is simple rule engine application in favor for me to learn elixir
 
 ## Installation
 
@@ -17,4 +17,3 @@ If [available in Hex](https://hex.pm/docs/publish), the package can be installed
         def application do
           [applications: [:judge]]
         end
-
