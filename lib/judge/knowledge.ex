@@ -1,7 +1,10 @@
 defmodule Judge.Knowledge do
+  require Judge.Executor
   @moduledoc """
   GenServer to hold all authorization information related with role
+  It also evaluate rule
   """
+
   use GenServer
   @prefix "Judge"
 
@@ -20,7 +23,9 @@ defmodule Judge.Knowledge do
   Add new rule to process.
   format: [
     decisions: [name: 'judge', age: 20],
-    conditions: [type: 'simple', operator: 'is_equal_to', value: '20', param: 'amount']
+    conditions: [
+      %{type: 'simple', operator: 'is_equal_to', value: '20', param: 'amount'}
+    ]
   ]
   """
   def add(pid, rule) do
@@ -46,7 +51,8 @@ defmodule Judge.Knowledge do
 
   def handle_call({:evaluate, evidence}, _from, current_rules) do
     result = Enum.find(current_rules, %{ decisions: %{} }, (fn(rule) ->
-        Judge.SimpleExecutor.execute(evidence, rule)
+        Judge.Executor.execute(evidence, rule)
+        # Judge.SimpleExecutor.execute(evidence, rule)
       end)
     )
     { :reply, result[:decisions], current_rules }
