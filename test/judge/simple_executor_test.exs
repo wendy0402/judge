@@ -11,7 +11,7 @@ defmodule SimpleExecutorTest do
     }
 
     evidence = %{ amount: 20, name: "jack" }
-    assert execute(evidence, rule) == rule[:decisions]
+    assert execute(evidence, rule) == true
   end
 
   test "is_equal_to with evidence value != expected_value from conditions" do
@@ -21,7 +21,7 @@ defmodule SimpleExecutorTest do
     }
 
     evidence = %{ amount: 2000, name: "jack" }
-    assert execute(evidence, rule) == nil
+    assert execute(evidence, rule) == false
   end
 
   # is_not_equal_to
@@ -32,7 +32,7 @@ defmodule SimpleExecutorTest do
     }
 
     evidence = %{ amount: 20, name: "jack" }
-    assert execute(evidence, rule) == nil
+    assert execute(evidence, rule) == false
   end
 
   test "is_not_equal_to with evidence value != expected_value from conditions" do
@@ -42,7 +42,7 @@ defmodule SimpleExecutorTest do
     }
 
     evidence = %{ amount: 2000, name: "jack" }
-    assert execute(evidence, rule) == rule[:decisions]
+    assert execute(evidence, rule) == true
   end
 
   ### less_than
@@ -53,7 +53,7 @@ defmodule SimpleExecutorTest do
     }
 
     evidence = %{ amount: 20, name: "jack" }
-    assert execute(evidence, rule) == nil
+    assert execute(evidence, rule) == false
   end
 
   test "less_than with evidence value < expected_value from conditions" do
@@ -63,7 +63,7 @@ defmodule SimpleExecutorTest do
     }
 
     evidence = %{ amount: 5, name: "jack" }
-    assert execute(evidence, rule) == rule[:decisions]
+    assert execute(evidence, rule) == true
   end
 
   test "less_than with evidence value > expected_value from conditions" do
@@ -73,7 +73,7 @@ defmodule SimpleExecutorTest do
     }
 
     evidence = %{ amount: 200, name: "jack" }
-    assert execute(evidence, rule) == nil
+    assert execute(evidence, rule) == false
   end
 
   ## bigger_than
@@ -84,7 +84,7 @@ defmodule SimpleExecutorTest do
     }
 
     evidence = %{ amount: 20, name: "jack" }
-    assert execute(evidence, rule) == nil
+    assert execute(evidence, rule) == false
   end
 
   test "bigger_than with evidence value < expected_value from conditions" do
@@ -94,7 +94,7 @@ defmodule SimpleExecutorTest do
     }
 
     evidence = %{ amount: 5, name: "jack" }
-    assert execute(evidence, rule) == nil
+    assert execute(evidence, rule) == false
   end
 
   test "bigger_than with evidence value > expected_value from conditions" do
@@ -104,7 +104,7 @@ defmodule SimpleExecutorTest do
     }
 
     evidence = %{ amount: 200, name: "jack" }
-    assert execute(evidence, rule) == rule[:decisions]
+    assert execute(evidence, rule) == true
   end
 
   ### less_than
@@ -115,7 +115,7 @@ defmodule SimpleExecutorTest do
     }
 
     evidence = %{ amount: 20, name: "jack" }
-    assert execute(evidence, rule) == rule[:decisions]
+    assert execute(evidence, rule) == true
   end
 
   test "less_than_or_equal_to with evidence value < expected_value from conditions" do
@@ -125,7 +125,7 @@ defmodule SimpleExecutorTest do
     }
 
     evidence = %{ amount: 5, name: "jack" }
-    assert execute(evidence, rule) == rule[:decisions]
+    assert execute(evidence, rule) == true
   end
 
   test "less_than_or_equal_to with evidence value > expected_value from conditions" do
@@ -135,7 +135,7 @@ defmodule SimpleExecutorTest do
     }
 
     evidence = %{ amount: 200, name: "jack" }
-    assert execute(evidence, rule) == nil
+    assert execute(evidence, rule) == false
   end
 
   ## bigger_than_or_equal_to
@@ -146,7 +146,7 @@ defmodule SimpleExecutorTest do
     }
 
     evidence = %{ amount: 20, name: "jack" }
-    assert execute(evidence, rule) == rule[:decisions]
+    assert execute(evidence, rule) == true
   end
 
   test "bigger_than_or_equal_to with evidence value < expected_value from conditions" do
@@ -156,7 +156,7 @@ defmodule SimpleExecutorTest do
     }
 
     evidence = %{ amount: 5, name: "jack" }
-    assert execute(evidence, rule) == nil
+    assert execute(evidence, rule) == false
   end
 
   test "bigger_than_or_equal_to with evidence value > expected_value from conditions" do
@@ -166,6 +166,6 @@ defmodule SimpleExecutorTest do
     }
 
     evidence = %{ amount: 200, name: "jack" }
-    assert execute(evidence, rule) == rule[:decisions]
+    assert execute(evidence, rule) == true
   end
 end

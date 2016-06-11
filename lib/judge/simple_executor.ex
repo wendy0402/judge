@@ -1,13 +1,9 @@
 require IEx
 defmodule Judge.SimpleExecutor do
   def execute(evidence, rule) do
-    if match_conditions?(rule[:conditions], evidence) do
-      rule[:decisions]
-    end
+    match_conditions?(rule[:conditions], evidence)
   end
-  # def execute(evidence, rule) do
-  # end
-  #
+
   def match_conditions?(%{ operator: "is_equal_to"} = conditions, evidence) do
     evidence[conditions[:param]] == conditions[:value]
   end

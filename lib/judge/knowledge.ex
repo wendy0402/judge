@@ -27,6 +27,11 @@ defmodule Judge.Knowledge do
     add_action({ :ok }, pid, Map.new(rule))
   end
 
+
+  def evaluate(pid, evidence) do
+    GenServer.call(pid, {:evaluate, evidence})
+  end
+
   @doc """
   Return all stored rules in the process
   """
@@ -36,6 +41,15 @@ defmodule Judge.Knowledge do
 
   def handle_call({:add, new_rule}, _from, current_rules) do
     { :reply, {:ok}, [new_rule | current_rules] }
+  end
+
+
+  def handle_call({:evaluate, evidence}, _from, current_rules) do
+    result = Enum.find(current_rules, %{ decisions: %{} }, (fn(rule) ->
+        Judge.SimpleExecutor.execute(evidence, rule)
+      end)
+    )
+    { :reply, result[:decisions], current_rules }
   end
 
   def handle_call(:list, _from, current_rules) do
