@@ -1,5 +1,6 @@
 require IEx
 defmodule Judge.SimpleCondition do
+  @behaviour Judge.Condition
   def execute(evidence, condition) do
     match_condition?(condition, evidence)
   end
