@@ -44,8 +44,7 @@ defmodule Judge.KnowledgeTest do
     rule3 = %{
       decisions: %{name: "judge", age: 23},
       conditions: [
-        %{type: "simple", operator: "less_than", value: 22, param: :amount}
-      ]
+          %{type: "simple", operator: "less_than", value: 22, param: :amount}
     }
 
     Judge.Knowledge.add(pid, rule3)

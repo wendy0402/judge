@@ -11,8 +11,8 @@ defmodule Judge.Knowledge do
   @doc """
   Start our queue and link it.  This is a helper method
   """
-  def start_link do
-    GenServer.start_link(__MODULE__, [])
+  def start_link(name) do
+    GenServer.start_link(__MODULE__, %{}, name: name)
   end
 
   def init(state) do
