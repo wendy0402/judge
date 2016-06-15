@@ -38,6 +38,9 @@ defmodule Judge.Buckets do
     {:noreply, {knowledges, refs}}
   end
 
+  def handle_info(_msg, state) do
+    {:noreply, state}
+  end
 
   def handle_call({:lookup, name}, _from, {knowledges, _} = states) do
     { :reply, Map.fetch(knowledges, name), states }
