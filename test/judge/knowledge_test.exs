@@ -1,10 +1,9 @@
 defmodule Judge.KnowledgeTest do
-  require IEx
   use ExUnit.Case, async: true
   doctest Judge
 
   test "add/2" do
-    {:ok, pid } = Judge.Knowledge.start_link
+    {:ok, pid } = Judge.Knowledge.start_link(:test2)
     rule = %{
       decisions: %{name: "judge", age: 20},
       conditions: [
@@ -24,7 +23,7 @@ defmodule Judge.KnowledgeTest do
       ]
     }
     # when there is only one rule and passed
-    {:ok, pid } = Judge.Knowledge.start_link
+    {:ok, pid } = Judge.Knowledge.start_link(:test23)
     Judge.Knowledge.add(pid, rule)
     evidence = %{ amount: 20 }
     assert Judge.Knowledge.evaluate(pid, evidence) == rule[:decisions]
@@ -44,9 +43,9 @@ defmodule Judge.KnowledgeTest do
     rule3 = %{
       decisions: %{name: "judge", age: 23},
       conditions: [
-          %{type: "simple", operator: "less_than", value: 22, param: :amount}
+        %{type: "simple", operator: "less_than", value: 22, param: :amount}
+      ]
     }
-
     Judge.Knowledge.add(pid, rule3)
     assert Judge.Knowledge.evaluate(pid, evidence) == rule3[:decisions]
 

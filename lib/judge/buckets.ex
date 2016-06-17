@@ -22,13 +22,13 @@ defmodule Judge.Buckets do
 
   def handle_call({:create, name}, _from, { knowledges, refs} = states) do
     if Map.has_key?(knowledges, name) do
-      {:reply, knowledges, states}
+      {:reply, { :ok }, states}
     else
       {:ok, knowledge } = Judge.Knowledge.start_link(name)
       ref = Process.monitor(knowledge)
       refs = Map.put(refs, ref, name)
       result = Map.put(knowledges, name, knowledge)
-      {:reply, result, {result, refs} }
+      {:reply, { :ok }, {result, refs} }
     end
   end
 
