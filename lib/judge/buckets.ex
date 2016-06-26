@@ -12,12 +12,12 @@ defmodule Judge.Buckets do
   @doc """
    Lookup knowledge pid for name stored in `server`
   """
-  def lookup(buckets, name) do
-    GenServer.call(buckets, {:lookup, name})
+  def lookup(name) do
+    GenServer.call(__MODULE__, {:lookup, name})
   end
 
-  def create(buckets, name) do
-    GenServer.call(buckets, {:create, name})
+  def create(name) do
+    GenServer.call(__MODULE__, {:create, name})
   end
 
   def handle_call({:create, name}, _from, { knowledges, refs} = states) do
